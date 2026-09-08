@@ -1,0 +1,43 @@
+[
+{
+"id":1,
+"title":"The First Archive",
+"author":"Unknown",
+"price":0,
+"cover":"assets/covers/book1.png",
+"free":true
+},
+
+{
+"id":2,
+"title":"The Silent Garden",
+"author":"Archive Collection",
+"price":1.50,
+"cover":"assets/covers/book2.png"
+},
+
+{
+"id":3,
+"title":"Letters Of Time",
+"author":"Archive Collection",
+"price":1.50,
+"cover":"assets/covers/book3.png"
+},
+
+{
+"id":4,
+"title":"The Forgotten Pages",
+"author":"Archive Collection",
+"price":1.50,
+"cover":"assets/covers/book4.png"
+},
+
+{
+"id":5,
+"title":"Dreams Written In Ink",
+"author":"Archive Collection",
+"price":1.50,
+"cover":"assets/covers/book5.png"
+}
+
+]
