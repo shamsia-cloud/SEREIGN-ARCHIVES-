@@ -1,71 +1,102 @@
-jfetch("../data/books.json")
-
-.then(response => response.json())
-
-.then(books => {
-
-
-const container =
-document.getElementById("book-container");
+// ============================
+// SEREIGN ARCHIVES
+// PRODUCT SYSTEM
+// ============================
 
 
-books.forEach(book=>{
+const productContainer = document.querySelector(".book-grid");
 
 
-let card=document.createElement("article");
+async function loadBooks(){
 
-card.className="book-card";
-
-
-
-card.innerHTML=`
-
-<img src="../${book.cover}">
+    if(!productContainer) return;
 
 
-<h2>
-${book.title}
-</h2>
+    try {
+
+        const response = await fetch("../data/books.json");
+
+        const books = await response.json();
 
 
-<p>
-${book.author}
-</p>
+        productContainer.innerHTML = "";
 
 
-<p class="price">
+        books.forEach(book => {
 
-${book.free ? "FREE" : "$"+book.price}
 
-</p>
+            const card = document.createElement("article");
 
-${book.free ? 
-`
-<a 
-class="book-button"
-href="reader.html?id=${book.id}">
-Read Now
-</a>
-`
-:
-`
-<button 
-class="book-button add-cart"
-data-id="${book.id}">
-Purchase
-</button>
-`
+            card.className = "book-card";
+
+
+            card.innerHTML = `
+
+                <img 
+                src="${book.cover}" 
+                alt="${book.title}"
+                >
+
+
+                <h3>
+                ${book.title}
+                </h3>
+
+
+                <p>
+                ${book.description}
+                </p>
+
+
+                <div class="price">
+
+                ${
+                    book.price === 0
+                    ? "Free"
+                    : "$" + book.price
+                }
+
+                </div>
+
+
+                <button 
+                class="btn book-action"
+                data-id="${book.id}"
+                >
+
+                ${
+                    book.price === 0
+                    ? "Read Now"
+                    : "Add To Cart"
+                }
+
+                </button>
+
+
+            `;
+
+
+            productContainer.appendChild(card);
+
+
+        });
+
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Books loading failed:",
+            error
+        );
+
+    }
+
+
 }
 
 
-`;
 
-
-
-container.appendChild(card);
-
-
-});
-
-
-});
+loadBooks();
