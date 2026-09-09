@@ -1,34 +1,54 @@
+// ============================
+// READER SYSTEM
+// ============================
+
+
+const readerContainer =
+document.querySelector(".reader-content");
+
+
+
+async function loadReader(){
+
+
+if(!readerContainer)
+return;
+
+
+
 const params =
-new URLSearchParams(window.location.search);
-
-
-const bookID =
-Number(params.get("id"));
-
-
-
-let currentPage = 0;
-
-let pages = [];
+new URLSearchParams(
+window.location.search
+);
 
 
 
-fetch("../data/books.json")
+const id =
+params.get("id");
 
-.then(res=>res.json())
 
-.then(books=>{
+
+const response =
+await fetch("../data/books.json");
+
+
+
+const books =
+await response.json();
+
 
 
 const book =
-books.find(item=>item.id===bookID);
+books.find(
+item=>item.id == id
+);
 
 
 
 if(!book){
 
-document.getElementById("book-title").innerHTML=
-"Book Not Found";
+readerContainer.innerHTML=
+"<h2>Book not found</h2>";
 
 return;
 
@@ -36,84 +56,69 @@ return;
 
 
 
-document.getElementById("book-title").innerHTML=
-book.title;
+readerContainer.innerHTML = `
+
+
+<h1>
+${book.title}
+</h1>
+
+
+<p>
+${book.description}
+</p>
 
 
 
-// Temporary page loading
+${
+book.pdf
 
-pages=[
+?
 
-"../assets/pages/page1.png",
+`
 
-"../assets/pages/page2.png",
+<iframe
 
-"../assets/pages/page3.png"
+src="${book.pdf}"
 
-];
+width="100%"
 
+height="700px"
 
+>
 
-document.getElementById("page-image").src=
-pages[currentPage];
+</iframe>
 
+`
 
-});
+:
 
+`
 
+<p>
+Premium summary edition.
+</p>
 
+<a class="btn"
+href="${book.reader}"
+target="_blank">
 
+Open Reader
 
-const page =
-document.getElementById("page");
+</a>
 
+`
 
-
-document.getElementById("next")
-.onclick=()=>{
-
-
-if(currentPage < pages.length-1){
-
-page.classList.add("flip");
-
-
-setTimeout(()=>{
-
-currentPage++;
-
-document.getElementById("page-image").src=
-pages[currentPage];
+}
 
 
-page.classList.remove("flip");
 
+`;
 
-},500);
 
 
 }
 
 
-};
 
-
-
-
-
-document.getElementById("previous")
-.onclick=()=>{
-
-
-if(currentPage>0){
-
-currentPage--;
-
-document.getElementById("page-image").src=
-pages[currentPage];
-
-}
-
-
-};
+loadReader();
