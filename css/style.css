@@ -1,528 +1,761 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+/* ===========================
+   SEREIGN ARCHIVES
+   GLOBAL DESIGN SYSTEM
+=========================== */
+
+
+/* Fonts:
+Cinzel = luxury headings
+Cormorant Garamond = body
+Great Vibes = signature/cursive
+*/
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 
-body{
+:root {
 
-background:#080808;
-color:#f5efe6;
+    --background:
+    #0b0907;
 
-font-family:
-"Cormorant Garamond",
-serif;
+    --surface:
+    #15110d;
 
-overflow-x:hidden;
+    --gold:
+    #c8a45d;
 
-}
+    --gold-light:
+    #e8ca82;
 
+    --cream:
+    #f5ead7;
 
+    --text:
+    #ddd0b8;
 
-.hero{
+    --muted:
+    #9f927d;
 
-height:100vh;
-
-background:
-radial-gradient(circle at top,#3a2b20,#080808);
-
-display:flex;
-flex-direction:column;
-
-}
-
-
-
-nav{
-
-display:flex;
-justify-content:space-between;
-
-padding:30px 7%;
-
-font-family:"Playfair Display";
-
-}
-
-
-
-nav h2{
-
-letter-spacing:5px;
+    --border:
+    rgba(200,164,93,0.25);
 
 }
 
 
 
-nav a{
+html {
 
-color:white;
-text-decoration:none;
-
-margin-left:30px;
-
-opacity:.8;
+    scroll-behavior: smooth;
 
 }
 
 
 
-.hero-content{
+body {
 
-flex:1;
+    background:
+    var(--background);
 
-display:flex;
-flex-direction:column;
+    color:
+    var(--text);
 
-justify-content:center;
-align-items:center;
+    font-family:
+    "Cormorant Garamond",
+    serif;
 
-text-align:center;
-
-}
-
-
-
-.script{
-
-font-family:"Allura";
-
-font-size:60px;
-
-color:#d9b77d;
+    min-height:
+    100vh;
 
 }
 
 
 
-h1{
+/* ===========================
+   TYPOGRAPHY
+=========================== */
 
-font-family:"Playfair Display";
 
-font-size:clamp(70px,12vw,180px);
+h1,
+h2,
+h3 {
 
-line-height:.8;
+    font-family:
+    "Cinzel",
+    serif;
 
-letter-spacing:5px;
+    color:
+    var(--cream);
+
+    letter-spacing:
+    1px;
+
+}
+
+
+h1 {
+
+    font-size:
+    clamp(3rem,8vw,7rem);
 
 }
 
 
 
-.hero-content p{
+h2 {
 
-max-width:500px;
-
-font-size:22px;
-
-margin:30px;
+    font-size:
+    clamp(2rem,5vw,4rem);
 
 }
 
 
 
-.button{
+p {
 
-background:#c9a66b;
+    font-size:
+    1.2rem;
 
-padding:15px 45px;
-
-border-radius:50px;
-
-color:black;
-
-text-decoration:none;
-
-font-family:"Playfair Display";
+    line-height:
+    1.8;
 
 }
 
 
 
-.poem-section{
+a {
 
-height:100vh;
+    text-decoration:
+    none;
 
-position:relative;
-
-padding:80px;
-
-}
-
-
-
-.poem-section h2{
-
-font-size:70px;
-
-text-align:center;
+    color:
+    inherit;
 
 }
 
 
 
-.floating-poems img{
-
-position:absolute;
-
-width:220px;
-
-animation:float 6s infinite ease-in-out;
-
-}
+/* ===========================
+   NAVBAR
+=========================== */
 
 
+.navbar {
 
-.floating-poems img:nth-child(1){
+    position:
+    fixed;
 
-left:10%;
-top:40%;
+    top:
+    0;
 
-}
+    width:
+    100%;
 
+    padding:
+    25px 6%;
 
+    display:
+    flex;
 
-.floating-poems img:nth-child(2){
+    justify-content:
+    space-between;
 
-right:15%;
-top:20%;
+    align-items:
+    center;
 
-}
+    z-index:
+    100;
 
+    background:
+    rgba(11,9,7,0.65);
 
+    backdrop-filter:
+    blur(15px);
 
-.floating-poems img:nth-child(3){
-
-left:45%;
-bottom:10%;
-
-}
-
-
-
-@keyframes float{
-
-0%,100%{
-
-transform:translateY(0);
-
-}
-
-
-50%{
-
-transform:translateY(-30px);
-
-}
+    border-bottom:
+    1px solid var(--border);
 
 }
 
 
 
-.about{
+.logo {
 
-height:70vh;
+    font-family:
+    "Cinzel";
 
-display:flex;
+    color:
+    var(--gold);
 
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-text-align:center;
-
-}
-
-
-.about h2{
-
-font-size:80px;
+    font-size:
+    1.5rem;
 
 }
 
 
 
-.about p{
+.navbar nav {
 
-font-size:25px;
+    display:
+    flex;
 
-max-width:600px;
-
-  }
-
-.archive-header{
-
-height:45vh;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
+    gap:
+    30px;
 
 }
 
 
 
-.archive-header a{
+.navbar nav a {
 
-color:#d9b77d;
+    color:
+    var(--cream);
 
-text-decoration:none;
-
-letter-spacing:4px;
-
-}
-
-
-
-.archive-header h1{
-
-font-size:clamp(50px,8vw,110px);
-
-margin:20px;
+    transition:
+    .3s;
 
 }
 
 
 
-.archive-header p{
+.navbar nav a:hover,
+.navbar nav .active {
 
-font-size:22px;
-
-opacity:.8;
-
-}
-
-
-
-.marketplace{
-
-padding:60px 8%;
+    color:
+    var(--gold);
 
 }
 
 
 
-#book-container{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(260px,1fr));
-
-gap:50px;
-
-}
+/* ===========================
+   BUTTONS
+=========================== */
 
 
+.btn {
 
-.book-card{
+    display:
+    inline-block;
 
-background:#111;
+    padding:
+    14px 35px;
 
-border:1px solid rgba(255,255,255,.15);
+    border:
+    1px solid var(--gold);
 
-padding:30px;
+    border-radius:
+    50px;
 
-border-radius:30px;
+    color:
+    var(--gold-light);
 
-text-align:center;
-
-transition:.4s;
+    transition:
+    .3s;
 
 }
 
 
 
-.book-card:hover{
+.btn:hover {
 
-transform:translateY(-15px);
+    background:
+    var(--gold);
 
-}
-
-
-
-.book-card img{
-
-width:100%;
-
-height:350px;
-
-object-fit:cover;
-
-border-radius:20px;
+    color:
+    #111;
 
 }
 
 
 
-.book-card h2{
 
-font-family:"Playfair Display";
-
-margin-top:25px;
-
-font-size:32px;
-
-}
+/* ===========================
+   HERO
+=========================== */
 
 
+.hero {
 
-.book-card p{
+    height:
+    100vh;
 
-font-size:20px;
+    display:
+    flex;
 
-opacity:.7;
+    justify-content:
+    center;
 
-}
+    align-items:
+    center;
 
+    text-align:
+    center;
 
+    background:
 
-.price{
+    linear-gradient(
+    rgba(0,0,0,.5),
+    rgba(0,0,0,.8)
+    ),
 
-color:#d9b77d;
+    url("../assets/covers/library-bg.jpg");
 
-font-size:25px;
+    background-size:
+    cover;
 
-}
-
-
-
-.book-button{
-
-display:inline-block;
-
-margin-top:20px;
-
-padding:12px 35px;
-
-border-radius:40px;
-
-background:#d9b77d;
-
-color:#080808;
-
-text-decoration:none;
-
-}
-
-.reader-header{
-
-padding:40px;
-
-text-align:center;
-
-}
-
-
-.reader-header a{
-
-color:#d9b77d;
-
-text-decoration:none;
+    background-position:
+    center;
 
 }
 
 
 
-.reader{
+.hero span {
 
-min-height:100vh;
+    display:
+    block;
 
-display:flex;
+    font-family:
+    "Great Vibes";
 
-flex-direction:column;
+    color:
+    var(--gold);
 
-justify-content:center;
-
-align-items:center;
-
-}
-
-
-
-.book{
-
-perspective:2000px;
+    font-size:
+    1.5em;
 
 }
 
 
 
-.page{
+/* ===========================
+   BOOK ARCHIVE
+=========================== */
 
-width:350px;
 
-height:500px;
+.archive-section {
 
-background:#f7f0df;
-
-border-radius:10px;
-
-overflow:hidden;
-
-box-shadow:
-0 30px 80px rgba(0,0,0,.6);
-
-transform-origin:left;
-
-transition:1s;
+    padding:
+    120px 6%;
 
 }
 
 
 
-.page.flip{
+.book-grid {
 
-transform:
-rotateY(-180deg);
+    margin-top:
+    50px;
 
-}
+    display:
+    grid;
 
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
 
-
-.page img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
+    gap:
+    40px;
 
 }
 
 
 
-.controls{
+.book-card {
 
-margin-top:40px;
+    background:
+    var(--surface);
+
+    border:
+    1px solid var(--border);
+
+    padding:
+    25px;
+
+    border-radius:
+    20px;
+
+    transition:
+    .4s;
 
 }
 
 
 
-.controls button{
+.book-card:hover {
 
-background:#d9b77d;
+    transform:
+    translateY(-15px);
 
-border:none;
+    border-color:
+    var(--gold);
 
-padding:15px 35px;
+}
 
-margin:10px;
 
-border-radius:30px;
 
-font-family:"Playfair Display";
+.book-card img {
 
-cursor:pointer;
+    width:
+    100%;
+
+    border-radius:
+    12px;
+
+}
+
+
+
+.book-card h3 {
+
+    margin-top:
+    20px;
+
+}
+
+
+
+.price {
+
+    color:
+    var(--gold);
+
+    margin:
+    15px 0;
+
+}
+
+
+
+
+/* ===========================
+   POEMS
+=========================== */
+
+
+.poem-card {
+
+    background:
+    linear-gradient(
+    145deg,
+    #17120d,
+    #090705
+    );
+
+    border:
+    1px solid var(--border);
+
+    border-radius:
+    25px;
+
+    padding:
+    30px;
+
+    transition:
+    .4s;
+
+}
+
+
+
+.poem-card:hover {
+
+    transform:
+    scale(1.03);
+
+}
+
+
+
+.poem-cover {
+
+    width:
+    100%;
+
+    border-radius:
+    20px;
+
+}
+
+
+
+/* ===========================
+   READER PAGE
+=========================== */
+
+
+.reader {
+
+    padding:
+    150px 8%;
+
+    text-align:
+    center;
+
+}
+
+
+
+.book-page {
+
+    max-width:
+    850px;
+
+    margin:
+    auto;
+
+    background:
+    #f7efd9;
+
+    color:
+    #251b12;
+
+    padding:
+    60px;
+
+    min-height:
+    600px;
+
+    border-radius:
+    10px;
+
+    font-size:
+    1.3rem;
+
+}
+
+
+
+/* ===========================
+   CHECKOUT
+=========================== */
+
+
+.checkout {
+
+    padding:
+    150px 8%;
+
+}
+
+
+
+.cart-item {
+
+    display:
+    flex;
+
+    justify-content:
+    space-between;
+
+    padding:
+    20px 0;
+
+    border-bottom:
+    1px solid var(--border);
+
+}
+
+
+
+.checkout-total {
+
+    margin-top:
+    30px;
+
+    color:
+    var(--gold);
+
+    font-size:
+    2rem;
+
+}
+
+
+
+/* ===========================
+   ABOUT
+=========================== */
+
+
+.about-hero {
+
+    height:
+    80vh;
+
+    display:
+    flex;
+
+    justify-content:
+    center;
+
+    align-items:
+    center;
+
+    text-align:
+    center;
+
+}
+
+
+
+.about-section,
+.collection-section,
+.philosophy-section {
+
+    padding:
+    100px 8%;
+
+    text-align:
+    center;
+
+}
+
+
+
+.collection-grid {
+
+    margin-top:
+    50px;
+
+    display:
+    grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:
+    30px;
+
+}
+
+
+
+.collection-card {
+
+    padding:
+    40px;
+
+    background:
+    var(--surface);
+
+    border:
+    1px solid var(--border);
+
+    border-radius:
+    25px;
+
+}
+
+
+
+
+blockquote {
+
+    font-family:
+    "Great Vibes";
+
+    color:
+    var(--gold);
+
+    font-size:
+    3rem;
+
+}
+
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+
+.footer {
+
+    padding:
+    60px 8%;
+
+    border-top:
+    1px solid var(--border);
+
+    display:
+    flex;
+
+    justify-content:
+    space-between;
+
+    flex-wrap:
+    wrap;
+
+}
+
+
+
+.footer-links {
+
+    display:
+    flex;
+
+    gap:
+    20px;
+
+}
+
+
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+
+@media(max-width:700px){
+
+
+.navbar {
+
+    flex-direction:
+    column;
+
+    gap:
+    15px;
+
+}
+
+
+
+.navbar nav {
+
+    gap:
+    15px;
+
+    font-size:
+    .9rem;
+
+}
+
+
+
+.book-page {
+
+    padding:
+    30px;
+
+}
+
+
+
+blockquote {
+
+    font-size:
+    2rem;
+
+}
+
+
 
 }
