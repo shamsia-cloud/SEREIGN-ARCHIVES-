@@ -1,4 +1,4 @@
-fetch("../data/books.json")
+jfetch("../data/books.json")
 
 .then(response => response.json())
 
@@ -39,14 +39,23 @@ ${book.free ? "FREE" : "$"+book.price}
 
 </p>
 
-
+${book.free ? 
+`
 <a 
 class="book-button"
 href="reader.html?id=${book.id}">
-
-${book.free ? "Read Now":"Purchase"}
-
+Read Now
 </a>
+`
+:
+`
+<button 
+class="book-button add-cart"
+data-id="${book.id}">
+Purchase
+</button>
+`
+}
 
 
 `;
