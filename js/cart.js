@@ -1,21 +1,26 @@
-function getCart(){
+// ============================
+// CART SYSTEM
+// ============================
 
-return JSON.parse(
-localStorage.getItem("cart")
-) || [];
+
+let cart = JSON.parse(
+    localStorage.getItem("sereignCart")
+)
+|| [];
+
+
+
+
+
+function saveCart(){
+
+    localStorage.setItem(
+        "sereignCart",
+        JSON.stringify(cart)
+    );
 
 }
 
-
-
-function saveCart(cart){
-
-localStorage.setItem(
-"cart",
-JSON.stringify(cart)
-);
-
-}
 
 
 
@@ -24,50 +29,138 @@ document.addEventListener(
 function(e){
 
 
-if(e.target.classList.contains("add-cart")){
+    if(
+        e.target.classList.contains("book-action")
+    ){
 
 
-const id =
-Number(e.target.dataset.id);
-
-
-
-fetch("../data/books.json")
-
-.then(res=>res.json())
-
-.then(books=>{
-
-
-const book =
-books.find(
-item=>item.id===id
-);
+        const id =
+        e.target.dataset.id;
 
 
 
-let cart=getCart();
+        fetch("../data/books.json")
+
+        .then(res=>res.json())
+
+        .then(books=>{
 
 
-
-cart.push(book);
-
-
-
-saveCart(cart);
+            const book =
+            books.find(
+            item=>item.id == id
+            );
 
 
+            if(book.price > 0){
 
-alert(
-book.title+" added to cart"
-);
 
+                cart.push(book);
+
+
+                saveCart();
+
+
+                alert(
+                `${book.title} added to cart`
+                );
+
+
+            }
+
+
+            else {
+
+
+                window.location.href =
+                `reader.html?id=${id}`;
+
+
+            }
+
+
+        });
+
+
+    }
 
 
 });
+
+
+
+
+
+function displayCart(){
+
+
+const container =
+document.querySelector(".cart-items");
+
+
+if(!container)
+return;
+
+
+
+container.innerHTML="";
+
+
+
+let total = 0;
+
+
+
+cart.forEach(item=>{
+
+
+total += item.price;
+
+
+
+container.innerHTML += `
+
+
+<div class="cart-item">
+
+
+<h3>
+${item.title}
+</h3>
+
+
+<p>
+$${item.price}
+</p>
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+
+const totalBox =
+document.querySelector(
+".checkout-total"
+);
+
+
+if(totalBox){
+
+totalBox.innerHTML =
+`Total: $${total}`;
+
+}
+
 
 
 }
 
 
-});
+
+displayCart();
