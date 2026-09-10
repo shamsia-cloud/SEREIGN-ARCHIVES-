@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Explore the Sereign Archives digital book collection.">
+<meta name="description" content="Explore Sereign Archives original classics and premium curated editions.">
 
 <title>Sereign Archives | Books</title>
 
@@ -18,26 +18,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 
 </head>
 
 
+
 <body>
+
 
 
 <header class="navbar">
 
 
 <a href="../index.html" class="logo">
-Sereign
+Sereign Archives
 </a>
+
 
 
 <nav class="nav-links">
 
-<a href="books.html">
+<a href="books.html" class="active">
 Books
 </a>
 
@@ -56,10 +60,12 @@ About
 Cart
 </a>
 
+
 </nav>
 
 
 </header>
+
 
 
 
@@ -73,7 +79,7 @@ Cart
 
 
 <p>
-THE COLLECTION
+THE LIBRARY
 </p>
 
 
@@ -83,7 +89,7 @@ Book Archives
 
 
 <p>
-Explore timeless works and curated editions.
+Explore timeless classics and Sereign curated interpretations.
 </p>
 
 
@@ -94,32 +100,44 @@ Explore timeless works and curated editions.
 
 
 
+<!-- ORIGINAL ARCHIVES -->
 
-<section class="books-container">
+<section class="archive-section">
+
+
+<h2>
+Original Archives
+</h2>
+
+
+<p>
+Classic works preserved in their original form.
+</p>
 
 
 
-<!-- BOOK 1 FREE -->
+<div class="books-container">
+
 
 
 <article class="archive-book">
 
 
-<img 
-src="../assets/covers/books/48-laws-original.png"
+<img
+src="../assets/covers/48-laws-original.jpg"
 alt="The 48 Laws of Power">
 
 
 <div class="book-info">
 
 
-<h2>
+<h3>
 The 48 Laws of Power
-</h2>
+</h3>
 
 
 <p>
-Original Edition
+Robert Greene
 </p>
 
 
@@ -128,10 +146,48 @@ FREE
 </span>
 
 
-<a href="reader.html?book=48-laws-original">
+<a href="reader.html?id=1">
+Read Archive
+</a>
 
-Read Now
 
+</div>
+
+
+</article>
+
+
+
+
+
+<article class="archive-book">
+
+
+<img
+src="../assets/covers/the-prince.jpg"
+alt="The Prince">
+
+
+<div class="book-info">
+
+
+<h3>
+The Prince
+</h3>
+
+
+<p>
+Niccolò Machiavelli
+</p>
+
+
+<span>
+FREE
+</span>
+
+
+<a href="reader.html?id=3">
+Read Archive
 </a>
 
 
@@ -145,28 +201,138 @@ Read Now
 
 
 
-
-<!-- BOOK 2 PREMIUM -->
-
-
 <article class="archive-book">
 
 
-<img 
-src="../assets/covers/books/codex-power.png"
-alt="Codex of Power">
+<img
+src="../assets/covers/meditations.jpg"
+alt="Meditations">
 
 
 <div class="book-info">
 
 
+<h3>
+Meditations
+</h3>
+
+
+<p>
+Marcus Aurelius
+</p>
+
+
+<span>
+FREE
+</span>
+
+
+<a href="reader.html?id=5">
+Read Archive
+</a>
+
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+<article class="archive-book">
+
+
+<img
+src="../assets/covers/art-of-war.jpg"
+alt="The Art of War">
+
+
+<div class="book-info">
+
+
+<h3>
+The Art of War
+</h3>
+
+
+<p>
+Sun Tzu
+</p>
+
+
+<span>
+FREE
+</span>
+
+
+<a href="reader.html?id=7">
+Read Archive
+</a>
+
+
+</div>
+
+
+</article>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SEREIGN EDITIONS -->
+
+<section class="archive-section premium-section">
+
+
 <h2>
-Codex of Power
+Sereign Editions
 </h2>
 
 
 <p>
-Curated Edition
+Curated interpretations redesigned for modern readers.
+</p>
+
+
+
+<div class="books-container">
+
+
+
+
+
+<article class="archive-book">
+
+
+<img
+src="../assets/covers/codex-48.jpg"
+alt="Codex of 48">
+
+
+<div class="book-info">
+
+
+<h3>
+Codex of 48
+</h3>
+
+
+<p>
+Sereign Edition
 </p>
 
 
@@ -175,7 +341,9 @@ $1.50
 </span>
 
 
-<button>
+<button 
+class="add-cart"
+data-id="2">
 
 Add To Cart
 
@@ -193,27 +361,25 @@ Add To Cart
 
 
 
-<!-- BOOK 3 -->
-
 
 <article class="archive-book">
 
 
-<img 
-src="../assets/covers/books/book-three.png"
-alt="Book Three">
+<img
+src="../assets/covers/sovereign-codex.jpg"
+alt="The Sovereign Codex">
 
 
 <div class="book-info">
 
 
-<h2>
-The Wisdom Archive
-</h2>
+<h3>
+The Sovereign Codex
+</h3>
 
 
 <p>
-Premium Edition
+Sereign Edition
 </p>
 
 
@@ -222,7 +388,9 @@ $1.50
 </span>
 
 
-<button>
+<button
+class="add-cart"
+data-id="4">
 
 Add To Cart
 
@@ -240,27 +408,25 @@ Add To Cart
 
 
 
-<!-- BOOK 4 -->
-
 
 <article class="archive-book">
 
 
-<img 
-src="../assets/covers/books/book-four.png"
-alt="Book Four">
+<img
+src="../assets/covers/inner-empire.jpg"
+alt="The Inner Empire">
 
 
 <div class="book-info">
 
 
-<h2>
-The Essential Manuscript
-</h2>
+<h3>
+The Inner Empire
+</h3>
 
 
 <p>
-Premium Edition
+Sereign Edition
 </p>
 
 
@@ -269,7 +435,9 @@ $1.50
 </span>
 
 
-<button>
+<button
+class="add-cart"
+data-id="6">
 
 Add To Cart
 
@@ -287,27 +455,25 @@ Add To Cart
 
 
 
-<!-- BOOK 5 -->
-
 
 <article class="archive-book">
 
 
-<img 
-src="../assets/covers/books/book-five.png"
-alt="Book Five">
+<img
+src="../assets/covers/strategic-codex.jpg"
+alt="The Strategic Codex">
 
 
 <div class="book-info">
 
 
-<h2>
-The Hidden Codex
-</h2>
+<h3>
+The Strategic Codex
+</h3>
 
 
 <p>
-Premium Edition
+Sereign Edition
 </p>
 
 
@@ -316,7 +482,9 @@ $1.50
 </span>
 
 
-<button>
+<button
+class="add-cart"
+data-id="8">
 
 Add To Cart
 
@@ -329,6 +497,11 @@ Add To Cart
 </article>
 
 
+
+
+
+
+</div>
 
 
 </section>
@@ -340,7 +513,9 @@ Add To Cart
 
 
 
-<footer>
+
+
+<footer class="footer">
 
 
 <p>
@@ -352,6 +527,10 @@ Add To Cart
 
 
 
+<script src="../js/cart.js"></script>
+
+
 </body>
+
 
 </html>
