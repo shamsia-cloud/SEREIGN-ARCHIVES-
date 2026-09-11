@@ -1,166 +1,97 @@
-// ============================
-// CART SYSTEM
-// ============================
+const cartContainer =
+document.querySelector(".cart-container");
 
 
-let cart = JSON.parse(
-    localStorage.getItem("sereignCart")
-)
-|| [];
+function loadCart(){
 
 
+if(!cartContainer) return;
 
 
 
-function saveCart(){
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
 
-    localStorage.setItem(
-        "sereignCart",
-        JSON.stringify(cart)
-    );
+
+
+if(cart.length===0){
+
+cartContainer.innerHTML=
+`
+<p>
+Your archive is empty.
+</p>
+`;
+
+return;
 
 }
 
 
 
-
-document.addEventListener(
-"click",
-function(e){
-
-
-    if(
-        e.target.classList.contains("book-action")
-    ){
-
-
-        const id =
-        e.target.dataset.id;
+cartContainer.innerHTML="";
 
 
 
-        fetch("../data/books.json")
-
-        .then(res=>res.json())
-
-        .then(books=>{
+cart.forEach((item,index)=>{
 
 
-            const book =
-            books.find(
-            item=>item.id == id
-            );
+const card=document.createElement("article");
 
 
-            if(book.price > 0){
+card.className="cart-item";
 
 
-                cart.push(book);
+card.innerHTML=
+`
 
-
-                saveCart();
-
-
-                alert(
-                `${book.title} added to cart`
-                );
-
-
-            }
-
-
-            else {
-
-
-                window.location.href =
-                `reader.html?id=${id}`;
-
-
-            }
-
-
-        });
-
-
-    }
-
-
-});
-
-
-
-
-
-function displayCart(){
-
-
-const container =
-document.querySelector(".cart-items");
-
-
-if(!container)
-return;
-
-
-
-container.innerHTML="";
-
-
-
-let total = 0;
-
-
-
-cart.forEach(item=>{
-
-
-total += item.price;
-
-
-
-container.innerHTML += `
-
-
-<div class="cart-item">
-
-
-<h3>
-${item.title}
-</h3>
-
+<h3>${item.name}</h3>
 
 <p>
-$${item.price}
+${item.price}
 </p>
 
 
-</div>
+<button onclick="removeItem(${index})">
+Remove
+</button>
 
 
 `;
 
 
+cartContainer.appendChild(card);
+
+
+
 });
 
 
+}
 
-const totalBox =
-document.querySelector(
-".checkout-total"
+
+
+function removeItem(index){
+
+
+let cart=
+JSON.parse(localStorage.getItem("cart")) || [];
+
+
+cart.splice(index,1);
+
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
 );
 
 
-if(totalBox){
-
-totalBox.innerHTML =
-`Total: $${total}`;
-
-}
-
+loadCart();
 
 
 }
 
 
 
-displayCart();
+loadCart();
