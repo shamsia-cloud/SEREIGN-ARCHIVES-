@@ -1,21 +1,3 @@
-// ============================
-// READER SYSTEM
-// ============================
-
-
-const readerContainer =
-document.querySelector(".reader-content");
-
-
-
-async function loadReader(){
-
-
-if(!readerContainer)
-return;
-
-
-
 const params =
 new URLSearchParams(
 window.location.search
@@ -23,102 +5,45 @@ window.location.search
 
 
 
-const id =
+const bookID =
 params.get("id");
 
 
 
-const response =
-await fetch("../data/books.json");
+const readerFrame =
+document.querySelector("#reader-frame");
 
 
 
-const books =
-await response.json();
+const books={
+
+
+1:
+"../assets/pdf/48-laws-of-power.pdf",
+
+
+3:
+"../assets/pdf/the-prince.pdf",
+
+
+5:
+"../assets/pdf/meditations.pdf",
+
+
+7:
+"../assets/pdf/art-of-war.pdf"
 
 
 
-const book =
-books.find(
-item=>item.id == id
-);
+};
 
 
 
-if(!book){
-
-readerContainer.innerHTML=
-"<h2>Book not found</h2>";
-
-return;
-
-}
+if(readerFrame && books[bookID]){
 
 
-
-readerContainer.innerHTML = `
-
-
-<h1>
-${book.title}
-</h1>
-
-
-<p>
-${book.description}
-</p>
-
-
-
-${
-book.pdf
-
-?
-
-`
-
-<iframe
-
-src="${book.pdf}"
-
-width="100%"
-
-height="700px"
-
->
-
-</iframe>
-
-`
-
-:
-
-`
-
-<p>
-Premium summary edition.
-</p>
-
-<a class="btn"
-href="${book.reader}"
-target="_blank">
-
-Open Reader
-
-</a>
-
-`
-
-}
-
-
-
-`;
-
+readerFrame.src =
+books[bookID];
 
 
 }
-
-
-
-loadReader();
