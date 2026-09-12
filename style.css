@@ -1,0 +1,808 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+:root {
+  --bg: #0b0b0a;
+  --surface: #121211;
+  --surface-light: #1a1a18;
+  --cream: #e8e4d8;
+  --muted: #8d8b82;
+  --gold: #b9a47a;
+  --border: rgba(232, 228, 216, 0.13);
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "DM Sans", sans-serif;
+  --mono: "DM Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.page-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+/* NAVBAR */
+
+.navbar {
+  height: 82px;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.brand small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  margin-left: 100px;
+}
+
+.nav-links a {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--cream);
+}
+
+.cart-button {
+  border: 1px solid var(--border);
+  padding: 12px 17px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.cart-button:hover {
+  border-color: var(--gold);
+}
+
+.cart-button span {
+  color: var(--gold);
+  margin-left: 7px;
+}
+
+.menu-toggle,
+.mobile-menu {
+  display: none;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.48;
+  filter: saturate(0.65);
+  transform: scale(1.04);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(11,11,10,0.96) 0%, rgba(11,11,10,0.7) 42%, rgba(11,11,10,0.2) 100%),
+    linear-gradient(0deg, var(--bg) 0%, transparent 35%, rgba(11,11,10,0.4) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 1250px;
+  margin: 100px auto 0;
+}
+
+.eyebrow,
+.section-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow span,
+.section-label span {
+  color: var(--muted);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 105px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -4px;
+  margin: 30px 0;
+  max-width: 850px;
+}
+
+.hero h1 em,
+h2 i {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.hero-description {
+  max-width: 380px;
+  color: #aaa79b;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 35px;
+  align-items: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 35px;
+  padding: 16px 19px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  transition: 0.3s;
+}
+
+.button-primary {
+  background: var(--cream);
+  color: #151513;
+}
+
+.button-primary:hover {
+  background: var(--gold);
+}
+
+.button-ghost {
+  color: var(--muted);
+}
+
+.button-ghost:hover {
+  color: var(--cream);
+}
+
+.hero-bottom {
+  position: absolute;
+  bottom: 28px;
+  left: 5vw;
+  right: 5vw;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #77766e;
+}
+
+/* INTRO */
+
+.intro-section,
+.featured-section,
+.poems-preview {
+  padding: 140px 5vw;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 10%;
+  margin-top: 65px;
+  align-items: end;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(42px, 5vw, 75px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+}
+
+.intro-copy {
+  padding-bottom: 7px;
+  max-width: 370px;
+}
+
+.intro-copy p,
+.editions-content > p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.text-link,
+.outline-link {
+  display: inline-flex;
+  gap: 30px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 10px;
+}
+
+.text-link span,
+.outline-link span {
+  color: var(--gold);
+}
+
+/* FEATURED BOOKS */
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+.section-heading h2 {
+  margin-top: 25px;
+}
+
+.outline-link {
+  border: 1px solid var(--border);
+  padding: 14px 17px;
+  transition: 0.3s;
+}
+
+.outline-link:hover {
+  border-color: var(--gold);
+}
+
+.book-carousel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.book-card {
+  min-width: 0;
+}
+
+.book-image {
+  position: relative;
+  background: #191917;
+  overflow: hidden;
+  aspect-ratio: 0.68;
+  border: 1px solid var(--border);
+}
+
+.book-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.7s cubic-bezier(.2,.8,.2,1);
+}
+
+.book-card:hover .book-image img {
+  transform: scale(1.055);
+}
+
+.book-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,9,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.4s;
+  backdrop-filter: blur(3px);
+}
+
+.book-card:hover .book-overlay {
+  opacity: 1;
+}
+
+.book-overlay a {
+  border: 1px solid var(--cream);
+  padding: 13px 18px;
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.book-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 18px;
+  gap: 10px;
+}
+
+.book-meta h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.book-meta p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.free-tag {
+  font-family: var(--mono);
+  color: var(--gold);
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+/* EDITIONS */
+
+.editions-section {
+  background: var(--surface);
+  padding: 100px 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9%;
+  align-items: center;
+}
+
+.editions-visual {
+  position: relative;
+}
+
+.editions-visual img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  filter: saturate(0.55);
+}
+
+.visual-caption {
+  position: absolute;
+  bottom: 22px;
+  left: 25px;
+  right: 25px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #aaa79b;
+}
+
+.editions-content {
+  max-width: 500px;
+}
+
+.editions-content h2 {
+  margin: 30px 0;
+}
+
+.edition-features {
+  border-top: 1px solid var(--border);
+  margin: 35px 0;
+}
+
+.edition-features div {
+  display: flex;
+  gap: 30px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.edition-features span {
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 9px;
+}
+
+.edition-features p {
+  font-size: 12px;
+  color: #c2bfb3;
+}
+
+/* QUOTE */
+
+.quote-section {
+  text-align: center;
+  padding: 160px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.quote-symbol {
+  font-family: var(--serif);
+  font-size: 100px;
+  line-height: 0.5;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+blockquote {
+  font-family: var(--serif);
+  font-size: clamp(27px, 4vw, 54px);
+  font-weight: 400;
+  max-width: 900px;
+  margin: 40px auto 25px;
+  line-height: 1.25;
+}
+
+.quote-section p {
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+/* POEMS */
+
+.poems-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 60px;
+}
+
+.poems-card {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.poems-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.42) saturate(0.5);
+  transition: 0.7s;
+}
+
+.poems-card:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.52) saturate(0.6);
+}
+
+.poems-card-content {
+  position: absolute;
+  inset: 0;
+  padding: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.poems-card-content > span {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.poems-card-content h3 {
+  font-family: var(--serif);
+  font-size: clamp(35px, 4vw, 65px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.poems-card-content a {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cream);
+}
+
+/* FOOTER */
+
+.footer {
+  padding: 50px 5vw 25px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 70px;
+}
+
+.footer-top p {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  color: #55554f;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .nav-links {
+    gap: 18px;
+    margin-left: 0;
+  }
+
+  .book-carousel {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px 18px;
+  }
+
+  .editions-section {
+    grid-template-columns: 1fr;
+  }
+
+  .editions-visual img {
+    height: 450px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    height: 70px;
+    padding: 0 20px;
+  }
+
+  .nav-links,
+  .cart-button {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: 0;
+    color: var(--cream);
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #10100f;
+    z-index: 50;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: none;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .mobile-menu.show {
+    display: flex;
+  }
+
+  .mobile-menu a {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+
+  .hero {
+    min-height: 760px;
+  }
+
+  .hero-content {
+    width: auto;
+    margin: 100px 20px 0;
+  }
+
+  .hero h1 {
+    font-size: 51px;
+    letter-spacing: -2px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+    max-width: 290px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .hero-bottom {
+    left: 20px;
+    right: 20px;
+  }
+
+  .hero-bottom span:nth-child(2) {
+    display: none;
+  }
+
+  .intro-section,
+  .featured-section,
+  .poems-preview {
+    padding: 85px 20px;
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 42px;
+  }
+
+  .section-heading,
+  .poems-heading {
+    display: block;
+  }
+
+  .section-heading .outline-link {
+    margin-top: 30px;
+  }
+
+  .book-carousel {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px 12px;
+  }
+
+  .book-meta {
+    display: block;
+  }
+
+  .book-meta h3 {
+    font-size: 16px;
+  }
+
+  .free-tag {
+    display: block;
+    margin-top: 7px;
+  }
+
+  .editions-section {
+    padding: 70px 20px;
+    gap: 55px;
+  }
+
+  .editions-visual img {
+    height: 380px;
+  }
+
+  .editions-content h2 {
+    font-size: 42px;
+  }
+
+  .quote-section {
+    padding: 110px 25px;
+  }
+
+  blockquote {
+    font-size: 31px;
+  }
+
+  .poems-heading h2 {
+    margin-top: 25px;
+  }
+
+  .poems-card {
+    height: 420px;
+  }
+
+  .poems-card-content {
+    padding: 25px;
+  }
+
+  .poems-card-content h3 {
+    font-size: 38px;
+  }
+
+  .footer-top {
+    display: block;
+    padding-bottom: 40px;
+  }
+
+  .footer-top p {
+    margin-top: 25px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
