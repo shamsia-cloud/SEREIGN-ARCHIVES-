@@ -862,6 +862,7 @@
 
       localStorage.setItem("sereignPurchased", JSON.stringify(cart));
       localStorage.setItem("sereignCustomer", JSON.stringify({ name, email }));
+window.location.href = "library.html";
 
       checkoutForm.style.display = "none";
       successState.classList.add("show");
