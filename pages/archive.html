@@ -869,5 +869,133 @@
         </div>
       </article>
 
-      <!-- PRINCE PREMIUM -->
-      <article class="book-card premium-card" data-category="power" data-title="Sereign Edition The Prince">
+     <!-- PRINCE PREMIUM -->
+<article class="book-card premium-card" data-category="power" data-title="Sereign Edition The Prince">
+  <div class="book-cover">
+    <img src="../assets/prince-sereign.png" alt="Sereign Edition The Prince">
+
+    <div class="book-hover">
+      <div class="book-hover-content">
+        <small>SEREIGN EDITION</small>
+        <button class="book-action premium add-cart"
+          data-id="prince-sereign"
+          data-title="The Prince: Sereign Edition"
+          data-price="1.50"
+          data-image="../assets/prince-sereign.png">
+          Add to Cart +
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-info">
+    <div>
+      <h3>The Prince</h3>
+      <p>Sereign Edition</p>
+      <div class="premium-price">$1.50</div>
+    </div>
+    <span class="book-type">CURATED</span>
+  </div>
+</article>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="brand">
+      <span class="brand-mark">S</span>
+      <span>SEREIGN <small>ARCHIVES</small></span>
+    </div>
+
+    <p>An archive for the endlessly curious.</p>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Sereign Archives</span>
+    <span>READ. REFLECT. BECOME.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Added to your cart.</div>
+
+<script>
+  // CART
+  let cart = JSON.parse(localStorage.getItem("sereignCart")) || [];
+
+  function updateCartCount() {
+    document.getElementById("cartCount").textContent = cart.length;
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2500);
+  }
+
+  document.querySelectorAll(".add-cart").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = {
+        id: button.dataset.id,
+        title: button.dataset.title,
+        price: button.dataset.price,
+        image: button.dataset.image
+      };
+
+      const exists = cart.some(book => book.id === item.id);
+
+      if (exists) {
+        showToast("This edition is already in your cart.");
+        return;
+      }
+
+      cart.push(item);
+      localStorage.setItem("sereignCart", JSON.stringify(cart));
+
+      updateCartCount();
+      showToast("Edition added to your cart.");
+    });
+  });
+
+  updateCartCount();
+
+  // FILTERS
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const allBooks = document.querySelectorAll(".book-card");
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      filterButtons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const filter = button.dataset.filter;
+
+      allBooks.forEach(book => {
+        if (filter === "all" || book.dataset.category === filter) {
+          book.classList.remove("hidden");
+        } else {
+          book.classList.add("hidden");
+        }
+      });
+    });
+  });
+
+  // SEARCH
+  document.getElementById("searchInput").addEventListener("input", function() {
+    const query = this.value.toLowerCase().trim();
+
+    allBooks.forEach(book => {
+      const title = book.dataset.title.toLowerCase();
+
+      book.classList.toggle("hidden", !title.includes(query));
+    });
+  });
+</script>
+
+</body>
+</html>
