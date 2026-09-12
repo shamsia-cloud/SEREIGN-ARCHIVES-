@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Sereign Archives</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+    :root {
+      --bg: #0b0b0a;
+      --surface: #121211;
+      --cream: #e8e4d8;
+      --muted: #8d8b82;
+      --gold: #b9a47a;
+      --border: rgba(232,228,216,0.13);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+      --mono: "DM Mono", monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--sans);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .navbar {
+      height: 82px;
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 7px;
+      letter-spacing: 4px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cream);
+    }
+
+    .cart-button {
+      border: 1px solid var(--border);
+      padding: 12px 17px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cart-button span {
+      color: var(--gold);
+      margin-left: 7px;
+    }
+
+    .hero {
+      min-height: 650px;
+      padding: 120px 5vw 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow,
+    .section-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .eyebrow span,
+    .section-label span {
+      color: var(--muted);
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(55px, 7vw, 100px);
+      font-weight: 400;
+      letter-spacing: -4px;
+      line-height: 1.02;
+      margin-top: 30px;
+    }
+
+    .hero h1 i {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .hero-description {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      max-width: 410px;
+      margin-top: 35px;
+    }
+
+    .hero-visual {
+      height: 430px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(185,164,122,0.12), transparent 45%),
+        var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual::before,
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(185,164,122,0.18);
+      border-radius: 50%;
+    }
+
+    .hero-visual::before {
+      width: 330px;
+      height: 330px;
+    }
+
+    .hero-visual::after {
+      width: 500px;
+      height: 500px;
+    }
+
+    .visual-letter {
+      font-family: var(--serif);
+      font-size: 180px;
+      font-style: italic;
+      color: rgba(232,228,216,0.08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .visual-caption {
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      right: 25px;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      z-index: 3;
+    }
+
+    .manifesto {
+      padding: 130px 5vw;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .manifesto h2 {
+      max-width: 950px;
+      margin: 30px auto 0;
+      font-family: var(--serif);
+      font-size: clamp(35px, 5vw, 68px);
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -2px;
+    }
+
+    .manifesto h2 i {
+      color: var(--gold);
+    }
+
+    .manifesto p {
+      max-width: 550px;
+      margin: 35px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .values {
+      padding: 100px 5vw;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .values-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 50px;
+    }
+
+    .values-header h2 {
+      font-family: var(--serif);
+      font-size: 45px;
+      font-weight: 400;
+      margin-top: 20px;
+    }
+
+    .values-header p {
+      max-width: 280px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    .value-card {
+      padding: 35px;
+      min-height: 250px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s;
+    }
+
+    .value-card:hover {
+      background: var(--surface);
+    }
+
+    .value-number {
+      font-family: var(--mono);
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    .value-card h3 {
+      font-family: var(--serif);
+      font-size: 27px;
+      font-weight: 400;
+      margin-top: 55px;
+    }
+
+    .value-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      margin-top: 15px;
+    }
+
+    .closing {
+      padding: 130px 5vw;
+      text-align: center;
+    }
+
+    .closing h2 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 80px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -3px;
+    }
+
+    .closing h2 i {
+      color: var(--gold);
+    }
+
+    .closing a {
+      display: inline-block;
+      margin-top: 35px;
+      border: 1px solid var(--gold);
+      padding: 16px 25px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .closing a:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .footer {
+      padding: 50px 5vw 25px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 60px;
+    }
+
+    .footer-top p {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      color: #55554f;
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .hero-visual {
+        height: 350px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .values-header {
+        display: block;
+      }
+
+      .values-header p {
+        margin-top: 25px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        height: 70px;
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 8px;
+      }
+
+      .cart-button {
+        padding: 10px;
+      }
+
+      .hero {
+        padding: 90px 20px 70px;
+      }
+
+      .hero h1 {
+        font-size: 60px;
+        letter-spacing: -2px;
+      }
+
+      .hero-visual {
+        height: 300px;
+      }
+
+      .visual-letter {
+        font-size: 130px;
+      }
+
+      .manifesto {
+        padding: 90px 20px;
+      }
+
+      .values {
+        padding: 80px 20px;
+      }
+
+      .values-header h2 {
+        font-size: 38px;
+      }
+
+      .value-card {
+        min-height: 220px;
+      }
+
+      .closing {
+        padding: 90px 20px;
+      }
+
+      .footer-top {
+        display: block;
+      }
+
+      .footer-top p {
+        margin-top: 25px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark">S</span>
+      <span>SEREIGN <small>ARCHIVES</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="archive.html">Archive</a>
+      <a href="poems.html">Poems</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+
+    <a href="cart.html" class="cart-button">
+      Cart <span id="cartCount">0</span>
+    </a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div>
+      <div class="eyebrow">
+        <span>01</span>
+        THE STORY
+      </div>
+
+      <h1>An archive<br />for the <i>curious.</i></h1>
+
+      <p class="hero-description">
+        Sereign Archives exists for those who believe that
+        a good book is more than something to finish.
+        It is something to return to, question, and carry.
+      </p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="visual-letter">S</div>
+
+      <div class="visual-caption">
+        <span>SEREIGN ARCHIVES</span>
+        <span>EST. 2026</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+
+    <div class="section-label">
+      <span>02</span>
+      OUR PHILOSOPHY
+    </div>
+
+    <h2>
+      The right words, encountered at the right time,
+      can change the direction of a <i>life.</i>
+    </h2>
+
+    <p>
+      We collect works that sharpen the mind, deepen reflection,
+      challenge assumptions, and remain relevant long after
+      the final page.
+    </p>
+
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+
+    <div class="values-header">
+      <div>
+        <div class="section-label">
+          <span>03</span>
+          WHAT WE BELIEVE
+        </div>
+
+        <h2>Built around<br /><i>better thinking.</i></h2>
+      </div>
+
+      <p>
+        An intentional collection of timeless ideas,
+        meaningful writing, and carefully developed editions.
+      </p>
+    </div>
+
+    <div class="values-grid">
+
+      <article class="value-card">
+        <div class="value-number">01 / ACCESS</div>
+        <h3>Knowledge<br />should be open.</h3>
+        <p>
+          Original works remain freely accessible.
+          Discovery should never be restricted by price.
+        </p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-number">02 / DEPTH</div>
+        <h3>Understanding<br />goes further.</h3>
+        <p>
+          Our enhanced editions are designed to help
+          readers unpack ideas and apply them meaningfully.
+        </p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-number">03 / CURIOSITY</div>
+        <h3>Keep<br />questioning.</h3>
+        <p>
+          The archive is not a destination.
+          It is a starting point for a lifetime of learning.
+        </p>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+
+    <div class="section-label" style="justify-content:center;">
+      <span>04</span>
+      BEGIN EXPLORING
+    </div>
+
+    <h2>
+      There is always<br />another <i>page.</i>
+    </h2>
+
+    <a href="archive.html">Enter the Archive ↗</a>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="footer-top">
+      <div class="brand">
+        <span class="brand-mark">S</span>
+        <span>SEREIGN <small>ARCHIVES</small></span>
+      </div>
+
+      <p>An archive for the endlessly curious.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Sereign Archives</span>
+      <span>READ. REFLECT. BECOME.</span>
+    </div>
+
+  </footer>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("sereignCart")) || [];
+    document.getElementById("cartCount").textContent = cart.length;
+
+    // Subtle reveal animation
+    const sections = document.querySelectorAll(
+      ".hero > div, .manifesto, .value-card, .closing"
+    );
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, { threshold: 0.12 });
+
+    sections.forEach(el => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(25px)";
+      el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+  </html>
