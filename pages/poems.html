@@ -1,359 +1,692 @@
-pp<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poems | Sereign Archives</title>
 
-<meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    :root {
+      --bg: #0b0b0a;
+      --surface: #121211;
+      --cream: #e8e4d8;
+      --muted: #8d8b82;
+      --gold: #b9a47a;
+      --border: rgba(232,228,216,0.13);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+      --mono: "DM Mono", monospace;
+    }
 
-<meta name="description" content="Explore the poetry archive of Sereign Archives.">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<title>Sereign Archives | Poems</title>
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--sans);
+      min-height: 100vh;
+    }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-<link rel="stylesheet" href="../css/style.css">
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
 
+    .navbar {
+      height: 82px;
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
 
+    .brand small {
+      display: block;
+      font-size: 7px;
+      letter-spacing: 4px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: 20px;
+    }
 
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
 
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cream);
+    }
+
+    .cart-button {
+      border: 1px solid var(--border);
+      padding: 12px 17px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cart-button span {
+      color: var(--gold);
+      margin-left: 7px;
+    }
+
+    .page-header {
+      padding: 115px 5vw 90px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::after {
+      content: "POETRY";
+      position: absolute;
+      right: -20px;
+      bottom: -50px;
+      font-family: var(--serif);
+      font-size: 190px;
+      color: rgba(255,255,255,0.025);
+      pointer-events: none;
+    }
+
+    .eyebrow,
+    .section-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .eyebrow span,
+    .section-label span {
+      color: var(--muted);
+    }
+
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(55px, 8vw, 110px);
+      font-weight: 400;
+      letter-spacing: -4px;
+      line-height: 1;
+      margin-top: 28px;
+    }
+
+    .page-header h1 i {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .page-header p {
+      max-width: 430px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+      margin-top: 28px;
+    }
+
+    .poetry-intro {
+      padding: 75px 5vw 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .poetry-intro h2 {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-top: 20px;
+    }
+
+    .poetry-intro h2 i {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .poetry-intro p {
+      max-width: 320px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .poems-grid {
+      padding: 35px 5vw 130px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .poem-card {
+      min-height: 390px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s, transform 0.4s;
+    }
+
+    .poem-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgba(185,164,122,0.12);
+      border-radius: 50%;
+      right: -70px;
+      top: -70px;
+      transition: transform 0.6s;
+    }
+
+    .poem-card:hover {
+      border-color: rgba(185,164,122,0.5);
+      transform: translateY(-5px);
+    }
+
+    .poem-card:hover::before {
+      transform: scale(1.4);
+    }
+
+    .poem-number {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    .poem-card h3 {
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 400;
+      line-height: 1.2;
+      max-width: 280px;
+    }
+
+    .poem-card h3 i {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .poem-author {
+      font-family: var(--mono);
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 1px;
+      margin-top: 15px;
+    }
+
+    .read-poem {
+      align-self: flex-start;
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--border);
+      padding: 13px 17px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .read-poem:hover {
+      background: var(--cream);
+      color: var(--bg);
+    }
+
+    .featured-poem {
+      grid-column: span 2;
+      min-height: 390px;
+      background:
+        linear-gradient(120deg, rgba(185,164,122,0.08), transparent 60%),
+        var(--surface);
+    }
+
+    .featured-poem h3 {
+      font-size: 48px;
+      max-width: 500px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .poem-reader {
+      width: 100%;
+      max-width: 650px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: #11110f;
+      border: 1px solid var(--border);
+      padding: 55px;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 22px;
+      top: 18px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 22px;
+    }
+
+    .reader-meta {
+      font-family: var(--mono);
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .poem-reader h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 43px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .reader-author {
+      font-family: var(--mono);
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 1px;
+      margin-bottom: 35px;
+    }
+
+    .poem-text {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 2;
+      color: #c8c4b8;
+      white-space: pre-line;
+    }
+
+    .footer {
+      padding: 50px 5vw 25px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 60px;
+    }
+
+    .footer-top p {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      color: #55554f;
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 900px) {
+      .poems-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .featured-poem {
+        grid-column: span 2;
+      }
+
+      .poetry-intro {
+        display: block;
+      }
+
+      .poetry-intro p {
+        margin-top: 25px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        height: 70px;
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 8px;
+      }
+
+      .cart-button {
+        padding: 10px;
+      }
+
+      .page-header {
+        padding: 90px 20px 65px;
+      }
+
+      .page-header h1 {
+        font-size: 60px;
+        letter-spacing: -2px;
+      }
+
+      .poetry-intro {
+        padding: 65px 20px 25px;
+      }
+
+      .poetry-intro h2 {
+        font-size: 38px;
+      }
+
+      .poems-grid {
+        padding: 25px 20px 90px;
+        grid-template-columns: 1fr;
+      }
+
+      .featured-poem {
+        grid-column: span 1;
+      }
+
+      .featured-poem h3 {
+        font-size: 37px;
+      }
+
+      .poem-card {
+        min-height: 340px;
+      }
+
+      .poem-reader {
+        padding: 40px 25px;
+      }
+
+      .poem-reader h2 {
+        font-size: 35px;
+      }
+
+      .footer-top {
+        display: block;
+      }
+
+      .footer-top p {
+        margin-top: 25px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-
-<header class="navbar">
-
-
-<a href="../index.html" class="logo">
-
-Sereign
-
-</a>
-
-
-
-<nav class="nav-links">
-
-
-<a href="books.html">
-
-Books
-
-</a>
-
-
-<a href="poems.html">
-
-Poems
-
-</a>
-
-
-<a href="about.html">
-
-About
-
-</a>
-
-
-<a href="checkout.html">
-
-Cart
-
-</a>
-
-
-
-</nav>
-
-
-</header>
-
-
-
-
-
-
-
-<main>
-
-
-
-<section class="page-header">
-
-
-<p>
-
-WRITTEN COLLECTIONS
-
-</p>
-
-
-<h1>
-
-Poetry Archive
-
-</h1>
-
-
-<p>
-
-A collection of emotions preserved through words.
-
-</p>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-<section class="poems-container">
-
-
-
-
-
-<!-- POEM ONE -->
-
-
-<article class="poem-card">
-
-
-<img
-src="../assets/poem-by-her.png"
-alt="By Her poem cover"
->
->
-
-
-<div class="poem-info">
-
-
-<h2>
-
-By Her
-
-</h2>
-
-
-<p>
-
-A reflection of admiration, memory and presence.
-
-</p>
-
-
-
-<a href="reader.html?poem=by-her">
-
-Open Poem
-
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<!-- POEM TWO -->
-
-
-<article class="poem-card">
-
-
-<img
-src="../assets/poem-by-him.png"
-alt="By Him poem cover"
->
->
-
-
-<div class="poem-info">
-
-
-<h2>
-
-By Him
-
-</h2>
-
-
-<p>
-
-A written perspective of emotions and experiences.
-
-</p>
-
-
-<a href="reader.html?poem=by-him">
-
-Open Poem
-
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<!-- POEM THREE -->
-
-
-<article class="poem-card">
-
-
-<img
-
-src="../assets/poem-what-i-want-to-say.png"
-
-alt="What I Want To Say To You poem cover"
-
->
-
-
-<div class="poem-info">
-
-
-<h2>
-
-What I Want To Say To You
-
-</h2>
-
-
-<p>
-
-Words left waiting to be expressed.
-
-</p>
-
-
-<a href="reader.html?poem=what-i-want-to-say">
-
-Open Poem
-
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<!-- POEM FOUR -->
-
-
-<article class="poem-card">
-
-
-<img
-
-src="../assets/poem-fleeting-time.png"
-
-alt="Hopeless poem cover"
-
->
-
-
-<div class="poem-info">
-
-
-<h2>
-
-HOPELESS 
-
-</h2>
-
-
-<p>
-
-A reflection on moments that disappear.
-
-</p>
-
-
-<a href="reader.html?poem=fleeting-time">
-
-Open Poem
-
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-</section>
-
-
-
-</main>
-
-
-
-
-
-
-
-<footer>
-
-
-<p>
-
-© 2026 Sereign Archives
-
-</p>
-
-
-</footer>
-
-
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark">S</span>
+      <span>SEREIGN <small>ARCHIVES</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="archive.html">Archive</a>
+      <a href="poems.html" class="active">Poems</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <a href="cart.html" class="cart-button">
+      Cart <span id="cartCount">0</span>
+    </a>
+  </header>
+
+  <!-- HEADER -->
+  <section class="page-header">
+    <div class="eyebrow">
+      <span>01</span>
+      THE POETRY ROOM
+    </div>
+
+    <h1>Words that <i>remain.</i></h1>
+
+    <p>
+      Fragments of thought, longing, silence, and truth.
+      A quieter corner of the archive.
+    </p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="poetry-intro">
+    <div>
+      <div class="section-label">
+        <span>02</span>
+        SELECTED WRITINGS
+      </div>
+
+      <h2>For what cannot<br />be <i>said.</i></h2>
+    </div>
+
+    <p>
+      Poetry does not always explain. Sometimes,
+      it simply gives a feeling somewhere to exist.
+    </p>
+  </section>
+
+  <!-- POEMS -->
+  <section class="poems-grid">
+
+    <article class="poem-card featured-poem">
+      <div class="poem-number">01 / FEATURED</div>
+
+      <div>
+        <h3>What I Want<br />to <i>Say.</i></h3>
+        <p class="poem-author">ANONYMOUS FRAGMENT</p>
+      </div>
+
+      <button
+        class="read-poem"
+        data-title="What I Want to Say"
+        data-author="Anonymous Fragment"
+        data-poem="There are things I carry quietly,\nwords that never find the light.\nI write them down in empty rooms,\nand let them breathe into the night.\n\nPerhaps the heart was never made\nfor everything it has to hold."
+      >
+        Read the poem ↗
+      </button>
+    </article>
+
+    <article class="poem-card">
+      <div class="poem-number">02</div>
+
+      <div>
+        <h3>Fleeting<br /><i>Time.</i></h3>
+        <p class="poem-author">THE PASSAGE OF THINGS</p>
+      </div>
+
+      <button
+        class="read-poem"
+        data-title="Fleeting Time"
+        data-author="The Passage of Things"
+        data-poem="Time does not knock before it leaves.\nIt takes the afternoon,\nthe face you knew,\nthe version of yourself you thought would stay.\n\nAnd still,\nwe call tomorrow ours."
+      >
+        Read the poem ↗
+      </button>
+    </article>
+
+    <article class="poem-card">
+      <div class="poem-number">03</div>
+
+      <div>
+        <h3>By <i>Her.</i></h3>
+        <p class="poem-author">A STUDY IN MEMORY</p>
+      </div>
+
+      <button
+        class="read-poem"
+        data-title="By Her"
+        data-author="A Study in Memory"
+        data-poem="She left no thunder behind her,\nonly the soft rearrangement of rooms.\nA cup untouched,\na song unfinished,\nand silence learning her name."
+      >
+        Read the poem ↗
+      </button>
+    </article>
+
+    <article class="poem-card">
+      <div class="poem-number">04</div>
+
+      <div>
+        <h3>By <i>Him.</i></h3>
+        <p class="poem-author">A QUIET CONFESSION</p>
+      </div>
+
+      <button
+        class="read-poem"
+        data-title="By Him"
+        data-author="A Quiet Confession"
+        data-poem="He learned to speak in smaller ways,\nin pauses and unfinished lines.\nSome men carry oceans in their chests\nand call it being fine."
+      >
+        Read the poem ↗
+      </button>
+    </article>
+
+  </section>
+
+  <!-- READING MODAL -->
+  <div class="modal" id="poemModal">
+    <div class="poem-reader">
+
+      <button class="close-modal" id="closeModal">×</button>
+
+      <div class="reader-meta">SEREIGN POETRY ROOM</div>
+
+      <h2 id="readerTitle"></h2>
+      <div class="reader-author" id="readerAuthor"></div>
+
+      <div class="poem-text" id="readerText"></div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="brand">
+        <span class="brand-mark">S</span>
+        <span>SEREIGN <small>ARCHIVES</small></span>
+      </div>
+
+      <p>An archive for the endlessly curious.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Sereign Archives</span>
+      <span>READ. REFLECT. BECOME.</span>
+    </div>
+  </footer>
+
+  <script>
+    // CART COUNT
+    const cart = JSON.parse(localStorage.getItem("sereignCart")) || [];
+    document.getElementById("cartCount").textContent = cart.length;
+
+    // POEM READER
+    const modal = document.getElementById("poemModal");
+    const readerTitle = document.getElementById("readerTitle");
+    const readerAuthor = document.getElementById("readerAuthor");
+    const readerText = document.getElementById("readerText");
+    const closeModal = document.getElementById("closeModal");
+
+    document.querySelectorAll(".read-poem").forEach(button => {
+      button.addEventListener("click", () => {
+        readerTitle.textContent = button.dataset.title;
+        readerAuthor.textContent = button.dataset.author;
+        readerText.textContent = button.dataset.poem;
+
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function closeReader() {
+      modal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    closeModal.addEventListener("click", closeReader);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeReader();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeReader();
+    });
+  </script>
 
 </body>
-
 </html>
