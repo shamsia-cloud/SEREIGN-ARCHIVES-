@@ -15,7 +15,7 @@ This repository is the gateway the assignment asked for: source, report, screens
 | The full coursework report (Obsidian) | [`coursework/00-Index.md`](coursework/00-Index.md)                                                   |     |
 | Why Python, React, and Vite coexist   | [`docs/Luminary_Archives_Implementation_Record.md`](docs/Luminary_Archives_Implementation_Record.md) |     |
 | To run the Python algorithms          | `python academic/main.py`                                                                            |     |
-| To use the marketplace                | the live web link on this repository                                                                 |     |
+| To use the marketplace                | the live web link on this repository [https://luminary-archive-eta.vercel.app/]                                                                |     |
 
 ---
 
