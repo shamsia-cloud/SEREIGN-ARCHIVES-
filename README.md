@@ -77,6 +77,10 @@ The assignment table, mapped onto this repository:
 
 ## A note to the person marking this
 
+I tried Uploading a Zip file of the full code stack but it was too heavy, apparently. If you don't mind, we can make it easier and faster by sending you the Zip file directly.
+
+ ***Thank you sir.***
+
 If you only have time for three artefacts:
 
 1. `python academic/main.py` — the Python the brief named.  
