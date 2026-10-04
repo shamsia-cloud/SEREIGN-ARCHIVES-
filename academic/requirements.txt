@@ -1,0 +1,2 @@
+# Luminary Archives — academic Python layer
+# No third-party packages. Python 3.10+ standard library only.
